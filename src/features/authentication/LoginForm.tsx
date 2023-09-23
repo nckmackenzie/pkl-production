@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
-import { USERS, formSchema } from './constants';
+import { formSchema } from './constants';
 import {
   Form,
   FormControl,
@@ -12,12 +12,10 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import toast from 'react-hot-toast';
-
-import { useUser } from './useUser';
+import { useLogin } from './useLogin';
 
 export default function LoginForm() {
-  const { login } = useUser();
+  const { isLoading, login } = useLogin();
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: {
       userId: '',
@@ -27,14 +25,21 @@ export default function LoginForm() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    const user = USERS.find(user => user.userId === values.userId);
+    // const user = USERS.find(user => user.userId === values.userId);
 
-    if (!user || user?.password !== values.password) {
-      toast.error('Invalid credentials');
-      return;
-    }
-    toast.success('Login success!');
-    login(user);
+    // if (!user || user?.password !== values.password) {
+    //   toast.error('Invalid credentials');
+    //   return;
+    // }
+
+    login(
+      { userId: values.userId, password: values.password },
+      {
+        onError: () => {
+          form.reset();
+        },
+      }
+    );
   }
 
   return (
@@ -47,7 +52,7 @@ export default function LoginForm() {
             <FormItem>
               <FormLabel>UserID</FormLabel>
               <FormControl>
-                <Input placeholder="eg 9070" {...field} />
+                <Input placeholder="eg 9070" {...field} disabled={isLoading} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -60,13 +65,20 @@ export default function LoginForm() {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input type="password" placeholder="password" {...field} />
+                <Input
+                  type="password"
+                  placeholder="password"
+                  {...field}
+                  disabled={isLoading}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">Login</Button>
+        <Button type="submit" disabled={isLoading}>
+          Login
+        </Button>
       </form>
     </Form>
   );

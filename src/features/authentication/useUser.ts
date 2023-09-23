@@ -1,22 +1,15 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { getUser } from '@/services/auth-api';
+import { useQuery } from '@tanstack/react-query';
 
 export function useUser() {
-  const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const navigate = useNavigate();
+  const {
+    isLoading,
+    data: user,
+    error,
+  } = useQuery({
+    queryFn: getUser,
+    queryKey: ['user'],
+  });
 
-  function login(user: User): void {
-    setIsLoading(true);
-    setUser(user);
-    setIsLoading(false);
-    navigate('/', { replace: true });
-  }
-
-  function logout() {
-    setUser(null);
-    navigate('/login', { replace: true });
-  }
-
-  return { isAuthenticated: !!user, user, login, logout, isLoading };
+  return { isLoading, isAuthenticated: !!user, user, error };
 }
