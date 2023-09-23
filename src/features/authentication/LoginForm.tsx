@@ -13,10 +13,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+
+import { useUser } from './useUser';
 
 export default function LoginForm() {
-  const navigate = useNavigate();
+  const { login } = useUser();
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: {
       userId: '',
@@ -33,7 +34,7 @@ export default function LoginForm() {
       return;
     }
     toast.success('Login success!');
-    navigate('/', { replace: true });
+    login(user);
   }
 
   return (
