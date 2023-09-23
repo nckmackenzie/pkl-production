@@ -47,12 +47,14 @@ export const departments: Department[] = [
 export const USERS: User[] = [
   {
     userId: '9070',
+    userName: 'Test User',
     departmentId: 1,
     role: 'User',
     password: '1234',
   },
   {
     userId: 'admin',
+    userName: 'administrator',
     departmentId: null,
     role: 'Admin',
     password: 'deuces',
