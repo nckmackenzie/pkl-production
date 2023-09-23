@@ -9,6 +9,7 @@ import {
   MenubarSubTrigger,
   MenubarTrigger,
 } from '@/components/ui/menubar';
+import { useNavigate } from 'react-router-dom';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useTheme } from '@/context/theme-context';
@@ -19,8 +20,14 @@ import { useUser } from '@/features/authentication/useUser';
 export default function UserMenu() {
   const { setTheme } = useTheme();
   const { user, isAuthenticated } = useUser();
+  const navigate = useNavigate();
 
   if (!isAuthenticated) return null;
+
+  function handleLogout() {
+    localStorage.removeItem('user');
+    navigate('/login', { replace: true });
+  }
 
   return (
     <Menubar className="bg-transparent w-max border-0 cursor-pointer">
@@ -48,7 +55,7 @@ export default function UserMenu() {
             </MenubarSubContent>
           </MenubarSub>
           <MenubarSeparator />
-          <MenubarItem>Logout</MenubarItem>
+          <MenubarItem onClick={handleLogout}>Logout</MenubarItem>
         </MenubarContent>
       </MenubarMenu>
     </Menubar>
