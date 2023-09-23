@@ -2,13 +2,23 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import { Toaster } from 'react-hot-toast';
 import Dashboard from './pages/Dashboard';
+import ProtectedRoute from './pages/ProtectedRoute';
+import AppLayout from './components/layout/AppLayout';
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Dashboard />} />
+          <Route
+            element={
+              <ProtectedRoute>
+                <AppLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route path="/" element={<Dashboard />} />
+          </Route>
         </Routes>
       </BrowserRouter>
       <Toaster
