@@ -5,6 +5,12 @@ type TableProviderState = {
   columns: string;
 };
 
+interface RowProps {
+  children: React.ReactNode;
+  clickable?: boolean;
+  onClick?: () => void;
+}
+
 const initialState: TableProviderState = {
   columns: '',
 };
@@ -40,12 +46,6 @@ function Header({ children }: { children: React.ReactNode }) {
       {children}
     </header>
   );
-}
-
-interface RowProps {
-  children: React.ReactNode;
-  clickable?: boolean;
-  onClick?: () => void;
 }
 
 function Row({ children, clickable, onClick }: RowProps) {
