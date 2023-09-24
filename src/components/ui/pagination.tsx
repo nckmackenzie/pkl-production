@@ -50,6 +50,7 @@ export default function Pagination({ count }: PaginationProps) {
           onClick={prevPage}
           disabled={currentPage === 1}
           className="flex items-center gap-1"
+          size="sm"
         >
           <ChevronLeft className="w-4 h-4" />
           <span className="pl-1">Previous</span>
@@ -59,6 +60,7 @@ export default function Pagination({ count }: PaginationProps) {
           onClick={nextPage}
           disabled={currentPage === pageCount}
           className="flex items-center gap-1"
+          size="sm"
         >
           <span className="pr-1">Next</span>
           <ChevronRight className="w-4 h-4" />
