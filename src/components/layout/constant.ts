@@ -17,7 +17,7 @@ const NAVITEMS2 = [
   {
     text: 'Job Cards',
     icon: FileText,
-    href: '/job-cards',
+    href: '/jobcards',
     roles: ['admin'],
   },
   {
