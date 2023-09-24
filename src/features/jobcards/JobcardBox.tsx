@@ -25,7 +25,11 @@ export default function JobcardBox() {
 
   return (
     <div className="space-y-4">
-      {jobCard ? <JobCardStat jobcard={jobCard} /> : <JobCardActions />}
+      {jobCard ? (
+        <JobCardStat jobcard={jobCard} onJobcardChange={setJobCard} />
+      ) : (
+        <JobCardActions />
+      )}
       <div>
         <Table columns="0.5fr 1fr 2fr 1fr 0.5fr">
           <Table.Header>
