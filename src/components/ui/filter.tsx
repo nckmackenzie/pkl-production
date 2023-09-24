@@ -12,6 +12,7 @@ export default function Filter({ options, filterKey }: FilterProps) {
 
   function handleClick(value: string) {
     searchParams.set(filterKey, value);
+    if (searchParams.get('page')) searchParams.set('page', '1');
     setSearchParams(searchParams);
   }
   return (
