@@ -50,6 +50,18 @@ module.exports = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        ongoing: {
+          DEFAULT: 'rgba(var(--ongoing),0.1)',
+          foreground: 'hsl(var(--ongoing-foreground))',
+        },
+        paused: {
+          DEFAULT: 'rgba(var(--paused),0.1)',
+          foreground: 'hsl(var(--paused-foreground))',
+        },
+        completed: {
+          DEFAULT: 'rgba(var(--completed),0.1)',
+          foreground: 'hsl(var(--completed-foreground))',
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -75,6 +87,11 @@ module.exports = {
       },
       minHeight: {
         dvh: '100dvh',
+      },
+      empty: {
+        '&:empty': {
+          display: 'none',
+        },
       },
     },
     fontFamily: {
