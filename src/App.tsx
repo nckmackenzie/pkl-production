@@ -4,6 +4,7 @@ import { Toaster } from 'react-hot-toast';
 import Dashboard from './pages/Dashboard';
 import ProtectedRoute from './pages/ProtectedRoute';
 import AppLayout from './components/layout/AppLayout';
+import JobCards from './pages/JobCards';
 function App() {
   return (
     <>
@@ -18,6 +19,7 @@ function App() {
             }
           >
             <Route path="/" element={<Dashboard />} />
+            <Route path="/jobcards" element={<JobCards />} />
           </Route>
         </Routes>
       </BrowserRouter>
