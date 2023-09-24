@@ -42,14 +42,21 @@ function Header({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Row({ children }: { children: React.ReactNode }) {
+interface RowProps {
+  children: React.ReactNode;
+  clickable?: boolean;
+  onClick?: () => void;
+}
+
+function Row({ children, clickable, onClick }: RowProps) {
   const { columns } = useContext(TableContext);
   return (
     <div
       role="row"
+      onClick={onClick}
       className={cn(
         'grid gap-x-6 transition-none items-center py-3 px-6 border-b last:border-b-0',
-        ''
+        clickable && 'cursor-pointer transition-colors hover:bg-secondary'
       )}
       style={{ gridTemplateColumns: columns }}
     >
