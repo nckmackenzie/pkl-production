@@ -8,13 +8,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import JobCardForm from './JobCardForm';
-
-const FILTEROPTIONS: Options[] = [
-  { value: 'all', label: 'All' },
-  { value: 'ongoing', label: 'Ongoing' },
-  { value: 'paused', label: 'Paused' },
-  { value: 'completed', label: 'Completed' },
-];
+import { FILTEROPTIONS } from './constants';
 
 export default function JobCardActions() {
   return (
