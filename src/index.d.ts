@@ -21,7 +21,7 @@ type JobCard = {
   client: string;
   description: string;
   cumulativeHrs: number;
-  hoursInProduction?: number;
+  hoursInProduction: number;
   currentDepartment?: string;
   startedOn: Date;
   status: JobStatus;
