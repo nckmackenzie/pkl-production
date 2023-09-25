@@ -193,3 +193,69 @@ export const formSchema = z.object({
   finishingHrs: z.number().min(1, 'Cannot be less than 1').optional(),
   cncHrs: z.number().min(1, 'Cannot be less than 1').optional(),
 });
+
+export const FILTEROPTIONS: Options[] = [
+  { value: 'all', label: 'All' },
+  { value: 'ongoing', label: 'Ongoing' },
+  { value: 'paused', label: 'Paused' },
+  { value: 'completed', label: 'Completed' },
+];
+
+export const TASKS: Task[] = [
+  {
+    id: 1,
+    jobcardNo: '12345',
+    staff: '9070',
+    hrsTaken: 24,
+    hrsAssigned: 36,
+  },
+  {
+    id: 2,
+    jobcardNo: '12346',
+    staff: '9070',
+    hrsTaken: 4,
+    hrsAssigned: 44,
+  },
+  {
+    id: 3,
+    jobcardNo: '12349',
+    staff: '9071',
+    hrsTaken: 48,
+    hrsAssigned: 88,
+  },
+  {
+    id: 4,
+    jobcardNo: '12350',
+    staff: '9072',
+    hrsTaken: 48,
+    hrsAssigned: 44,
+  },
+  {
+    id: 5,
+    jobcardNo: '12352',
+    staff: '9076',
+    hrsTaken: 24,
+    hrsAssigned: 28,
+  },
+  {
+    id: 6,
+    jobcardNo: '12353',
+    staff: '9079',
+    hrsTaken: 48,
+    hrsAssigned: 56,
+  },
+  {
+    id: 7,
+    jobcardNo: '12354',
+    staff: '9054',
+    hrsTaken: 33,
+    hrsAssigned: 24,
+  },
+  {
+    id: 8,
+    jobcardNo: '12356',
+    staff: '9067',
+    hrsTaken: 2,
+    hrsAssigned: 48,
+  },
+];
