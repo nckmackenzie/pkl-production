@@ -33,3 +33,11 @@ type Options = {
   label: string;
   value: string;
 };
+
+type Task = {
+  id: number;
+  jobcardNo: string;
+  staff: string;
+  hrsTaken: number;
+  hrsAssigned: number;
+};
