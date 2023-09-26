@@ -40,4 +40,5 @@ type Task = {
   staff: string;
   hrsTaken: number;
   hrsAssigned: number;
+  staffs?: string[];
 };
