@@ -1,7 +1,7 @@
 import * as z from 'zod';
 
 export const formSchema = z.object({
-  userId: z.string().nonempty('Enter user id'),
+  email: z.string().nonempty('Enter userid'),
   password: z.string().min(4, 'Password has to be 4 characters or more'),
 });
 

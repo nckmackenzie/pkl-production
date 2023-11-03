@@ -39,7 +39,7 @@ export default function UserMenu() {
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
             <div className="text-sm">
-              {user?.userName.toUpperCase() || 'ADMIN'}
+              {user?.userName?.toUpperCase() || 'ADMIN'}
             </div>
           </div>
         </MenubarTrigger>

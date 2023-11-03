@@ -7,8 +7,6 @@ export function useLogin() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  // const [, setValue] = useLocalStorageState(null, 'user');
-
   const { isLoading, mutate: login } = useMutation({
     mutationFn: loginApi,
     onSuccess: data => {

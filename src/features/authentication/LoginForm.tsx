@@ -18,22 +18,15 @@ export default function LoginForm() {
   const { isLoading, login } = useLogin();
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: {
-      userId: '',
+      email: '',
       password: '',
     },
     resolver: zodResolver(formSchema),
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // const user = USERS.find(user => user.userId === values.userId);
-
-    // if (!user || user?.password !== values.password) {
-    //   toast.error('Invalid credentials');
-    //   return;
-    // }
-
     login(
-      { userId: values.userId, password: values.password },
+      { email: values.email, password: values.password },
       {
         onError: () => {
           form.reset();
@@ -47,7 +40,7 @@ export default function LoginForm() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={form.control}
-          name="userId"
+          name="email"
           render={({ field }) => (
             <FormItem>
               <FormLabel>UserID</FormLabel>

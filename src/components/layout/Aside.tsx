@@ -1,13 +1,13 @@
 import Logo from '../ui/Logo';
 import { getMenuItems } from './constant';
-import { useUser } from '@/features/authentication/useUser';
+// import { useUser } from '@/features/authentication/useUser';
 import NavItem from './NavItem';
 // import { useQueryClient } from '@tanstack/react-query';
 
 export default function Aside() {
-  const { user } = useUser();
-  const role = user?.role.toLowerCase() || 'user';
-  const navItems = getMenuItems(role);
+  // const { user } = useUser();
+  // const role = user?.user_metadata || 'user';
+  const navItems = getMenuItems('admin');
   return (
     <aside>
       <header className="h-20 border-b flex flex-col items-center justify-center">
