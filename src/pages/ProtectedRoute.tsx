@@ -9,15 +9,16 @@ type ProtectedRouteProps = {
 };
 
 export default function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const { isLoading, isAuthenticated } = useUser();
+  const { isLoading, isAuthenticated, status } = useUser();
 
   const navigate = useNavigate();
 
   useEffect(
     function () {
-      if (!isLoading && !isAuthenticated) navigate('/login');
+      if (!isLoading && !isAuthenticated && status === 'unauthenticated')
+        navigate('/login');
     },
-    [isAuthenticated, isLoading, navigate]
+    [isAuthenticated, isLoading, navigate, status]
   );
   if (isLoading) return <Loader />;
 

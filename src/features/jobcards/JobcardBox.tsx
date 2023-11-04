@@ -7,21 +7,24 @@ import { JOBCARDS } from './constants';
 import JobCardRow from './JobCardRow';
 import { useSearchParams } from 'react-router-dom';
 import { PAGE_SIZE } from '@/lib/utils';
+import { useQuery } from '@tanstack/react-query';
+import { getJobCards } from '@/services/jobcards-api';
 
 export default function JobcardBox() {
   const [jobCard, setJobCard] = useState<JobCard | null>();
   const [searchParams] = useSearchParams();
-  const filteredStatus = searchParams.get('status') || 'all';
-  const page = !searchParams.get('page') ? 1 : Number(searchParams.get('page'));
+  const { data } = useQuery({ queryFn: getJobCards, queryKey: ['job-cards'] });
+  searchParams.get('status') || 'all';
+  // const page = !searchParams.get('page') ? 1 : Number(searchParams.get('page'));
 
-  const filtered = JOBCARDS.filter(jobcard => {
-    if (filteredStatus === 'all') return true;
-    return jobcard.status === filteredStatus;
-  });
+  // const filtered = JOBCARDS.filter(jobcard => {
+  //   if (filteredStatus === 'all') return true;
+  //   return jobcard.status === filteredStatus;
+  // });
 
-  const start = (page - 1) * PAGE_SIZE;
-  const end = page * PAGE_SIZE;
-  const paginated = filtered.slice(start, end);
+  // const start = (page - 1) * PAGE_SIZE;
+  // const end = page * PAGE_SIZE;
+  // const paginated = filtered.slice(start, end);
 
   return (
     <div className="space-y-4">
@@ -39,7 +42,7 @@ export default function JobcardBox() {
             <div>Cumulative Hrs</div>
             <div>Status</div>
           </Table.Header>
-          <Table.Body
+          {/* <Table.Body
             data={paginated}
             render={jobcard => (
               <JobCardRow
@@ -51,7 +54,7 @@ export default function JobcardBox() {
           />
           <Table.Footer>
             <Pagination count={filtered.length} />
-          </Table.Footer>
+          </Table.Footer> */}
         </Table>
       </div>
     </div>

@@ -1,27 +1,50 @@
-import { supabase } from '../supabase/supabase';
+// import { supabase } from '../supabase/supabase';
 
-type UserFields = { email: string; password: string };
+import { errorHandling, httpRequest, url } from '@/lib/utils';
 
-export async function login({ email, password }: UserFields) {
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email,
-    password,
-  });
+type UserFields = { user_id: string; password: string };
 
-  if (error) throw new Error(error.message);
+export type LoginResponse = {
+  user: User;
+  token: string;
+};
 
-  return data;
+type SessionResponse = {
+  user: User;
+  status: ResponseStatus;
+};
+
+export async function login({
+  user_id,
+  password,
+}: UserFields): Promise<LoginResponse> {
+  try {
+    const response = await fetch(url + '/users/login', {
+      method: 'POST',
+      body: JSON.stringify({ user_id, password }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) throw new Error(data.message || 'Unable to log you in');
+
+    return data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
 }
 
 export async function getUser() {
-  const { data, error } = await supabase.auth.getSession();
-  if (error) throw new Error(error.message);
+  //check session
+  const storedValue = localStorage.getItem('pkl-auth-status');
+  if (!storedValue) return null;
 
-  if (!data.session) return null;
+  try {
+    const data = await httpRequest(url + '/users/me');
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  return user;
+    return data as SessionResponse;
+  } catch (error) {
+    errorHandling(error);
+  }
 }

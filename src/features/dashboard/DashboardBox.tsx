@@ -19,7 +19,7 @@ export default function DashboardBox() {
           <CardStat
             className="col-span-6"
             title="No of ongoing tasks"
-            value={noOfJobs}
+            value={0}
             icon={Repeat2}
             bgColor="bg-green-500/10"
             textColor="text-green-500"
@@ -27,7 +27,7 @@ export default function DashboardBox() {
           <CardStat
             className="col-span-6"
             title="No of overdue jobs"
-            value={noOfOverDueJobs}
+            value={0}
             bgColor="bg-red-500/10"
             textColor="text-red-500"
             icon={AlarmClock}

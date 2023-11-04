@@ -11,17 +11,17 @@ export default function SummaryTable() {
         <div>Overdue Jobs</div>
         <div>% Overdue</div>
       </Table.Header>
-      <Table.Body
-        data={ONGOINGTASKSBYDEPT}
-        render={column => (
-          <SummaryRow
-            key={column.department}
-            department={column.department}
-            noOfOngoings={column.noOfOngoings}
-            noOfOverdue={column.noOfOverdue}
-          />
-        )}
-      />
+      {/* <Table.Body
+        // data={ONGOINGTASKSBYDEPT}
+        // render={column => (
+        //   <SummaryRow
+        //     key={column.department}
+        //     department={column.department}
+        //     noOfOngoings={column.noOfOngoings}
+        //     noOfOverdue={column.noOfOverdue}
+        //   />
+        // )}
+      /> */}
     </Table>
   );
 }

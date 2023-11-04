@@ -18,7 +18,7 @@ export default function LoginForm() {
   const { isLoading, login } = useLogin();
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: {
-      email: '',
+      user_id: '',
       password: '',
     },
     resolver: zodResolver(formSchema),
@@ -26,10 +26,10 @@ export default function LoginForm() {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     login(
-      { email: values.email, password: values.password },
+      { user_id: values.user_id, password: values.password },
       {
         onError: () => {
-          form.reset();
+          // form.reset();
         },
       }
     );
@@ -40,7 +40,7 @@ export default function LoginForm() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={form.control}
-          name="email"
+          name="user_id"
           render={({ field }) => (
             <FormItem>
               <FormLabel>UserID</FormLabel>
