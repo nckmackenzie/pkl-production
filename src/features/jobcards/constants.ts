@@ -235,24 +235,24 @@ export const JOBCARDS: JobCard[] = [
 ];
 
 export const formSchema = z.object({
-  jobcardNo: z
+  jobcard_no: z
     .string()
     .nonempty('Field is required')
     .length(5, 'Invalid Job Card No'),
   subject: z.string().nonempty('Field is required'),
   client: z.string().nonempty('Field is required'),
-  salesPerson: z.string().nonempty('Field is required'),
-  raisedDate: z.date({ required_error: 'Field is required' }),
+  sales_person: z.string().nonempty('Field is required'),
+  raised_date: z.date({ required_error: 'Field is required' }),
   yard: z.coerce.number().min(1, 'Cannot be less than 1').optional(),
   value: z.coerce.number().min(0, 'Cannot be less than 1').optional(),
-  machinery: z.coerce.number().min(1, 'Cannot be less than 1').optional(),
-  joinery: z.coerce.number().min(1, 'Cannot be less than 1').optional(),
-  carving: z.coerce.number().min(1, 'Cannot be less than 1').optional(),
-  sanding: z.coerce.number().min(1, 'Cannot be less than 1').optional(),
-  polishing: z.coerce.number().min(1, 'Cannot be less than 1').optional(),
-  upholstery: z.coerce.number().min(1, 'Cannot be less than 1').optional(),
-  finishing: z.coerce.number().min(1, 'Cannot be less than 1').optional(),
-  cnc: z.coerce.number().min(1, 'Cannot be less than 1').optional(),
+  machinery: z.coerce.number().min(0, 'Cannot be less than 1').optional(),
+  joinery: z.coerce.number().min(0, 'Cannot be less than 1').optional(),
+  carving: z.coerce.number().min(0, 'Cannot be less than 1').optional(),
+  sanding: z.coerce.number().min(0, 'Cannot be less than 1').optional(),
+  polishing: z.coerce.number().min(0, 'Cannot be less than 1').optional(),
+  upholstery: z.coerce.number().min(0, 'Cannot be less than 1').optional(),
+  finishing: z.coerce.number().min(0, 'Cannot be less than 1').optional(),
+  cnc: z.coerce.number().min(0, 'Cannot be less than 1').optional(),
 });
 
 export const FILTEROPTIONS: Options[] = [

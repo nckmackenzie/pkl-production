@@ -25,7 +25,7 @@ function apiUrl(): string {
 
 export const url = apiUrl() + '/api/v1';
 
-function getToken(): LoginResponse | null {
+export function getToken(): LoginResponse | null {
   const storedValue = localStorage.getItem('pkl-auth-status');
   return storedValue ? JSON.parse(storedValue) : null;
 }
@@ -33,7 +33,7 @@ function getToken(): LoginResponse | null {
 export async function httpRequest(
   url: string,
   method = 'GET',
-  body = null,
+  body: string | null = null,
   headers = {}
 ) {
   try {
@@ -60,7 +60,6 @@ export async function httpRequest(
     if (error instanceof Error) {
       throw new Error(error.message);
     } else {
-      // Rethrow the error.
       throw error;
     }
   }

@@ -1,4 +1,5 @@
-import { supabase } from '@/supabase/supabase';
+import { axiosRequest } from '@/lib/api';
+import { httpRequest, url } from '@/lib/utils';
 
 type Hours = {
   carving: number | null;
@@ -14,9 +15,9 @@ type Hours = {
 
 type Details = {
   client: string;
-  jobcardNo: string;
-  raisedDate: string;
-  salesPerson: string;
+  jobcard_no: string;
+  raised_date: string;
+  sales_person: string;
   subject: string;
   value: number | null;
 };
@@ -26,32 +27,21 @@ type Create = {
   hours: Hours;
 };
 
-export async function createJobcard({ details, hours }: Create) {
-  const { data, error } = await supabase
-    .from('jobcards')
-    .insert([details])
-    .select();
+const baseUrl = `${url}/jobcards`;
 
-  if (error) throw new Error(error.message);
-
-  const { error: hoursError } = await supabase
-    .from('jobcard_hours')
-    .insert([{ jobCardId: data[0].id, ...hours }]);
-
-  if (hoursError) {
-    await supabase.from('jobcards').delete().eq('id', data[0].id);
-    throw new Error(hoursError.message);
-  }
-
+export async function getJobCards(): Promise<JobCardResponse[]> {
+  const { data } = await axiosRequest(baseUrl);
   return data;
 }
 
-export async function getJobCards() {
-  const { data, error } = await supabase.rpc('raw-sql', {
-    query: 'SELECT * FROM jobcards',
-  });
-
-  console.log(data);
-
-  return data;
+export async function createJobcard({ details, hours }: Create) {
+  try {
+    await httpRequest(
+      `${url}/jobcards`,
+      'POST',
+      JSON.stringify({ details, hours })
+    );
+  } catch (error) {
+    if (error) throw new Error(error.message);
+  }
 }

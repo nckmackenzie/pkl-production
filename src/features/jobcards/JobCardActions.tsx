@@ -11,7 +11,13 @@ export default function JobCardActions() {
         New Job Card
       </Link>
 
-      <Filter filterKey="status" options={FILTEROPTIONS} />
+      <Filter
+        filterKey="status"
+        options={[
+          ...FILTEROPTIONS,
+          { value: 'unassigned', label: 'Unassigned' },
+        ]}
+      />
     </div>
   );
 }

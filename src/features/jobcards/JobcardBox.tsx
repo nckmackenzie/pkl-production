@@ -1,30 +1,30 @@
 import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useSearchParams } from 'react-router-dom';
+
 import Table from '@/components/ui/table';
 import Pagination from '@/components/ui/pagination';
 import JobCardStat from './JobCardStat';
 import JobCardActions from './JobCardActions';
-import { JOBCARDS } from './constants';
 import JobCardRow from './JobCardRow';
-import { useSearchParams } from 'react-router-dom';
+
 import { PAGE_SIZE } from '@/lib/utils';
-import { useQuery } from '@tanstack/react-query';
 import { getJobCards } from '@/services/jobcards-api';
 
 export default function JobcardBox() {
   const [jobCard, setJobCard] = useState<JobCard | null>();
   const [searchParams] = useSearchParams();
   const { data } = useQuery({ queryFn: getJobCards, queryKey: ['job-cards'] });
-  searchParams.get('status') || 'all';
-  // const page = !searchParams.get('page') ? 1 : Number(searchParams.get('page'));
+  const filteredStatus = searchParams.get('status') || 'ongoing';
+  const page = !searchParams.get('page') ? 1 : Number(searchParams.get('page'));
 
-  // const filtered = JOBCARDS.filter(jobcard => {
-  //   if (filteredStatus === 'all') return true;
-  //   return jobcard.status === filteredStatus;
-  // });
+  const filtered = data
+    ? data.filter(jobcard => jobcard.status === filteredStatus)
+    : [];
 
-  // const start = (page - 1) * PAGE_SIZE;
-  // const end = page * PAGE_SIZE;
-  // const paginated = filtered.slice(start, end);
+  const start = (page - 1) * PAGE_SIZE;
+  const end = page * PAGE_SIZE;
+  const paginated = filtered.slice(start, end);
 
   return (
     <div className="space-y-4">
@@ -42,19 +42,15 @@ export default function JobcardBox() {
             <div>Cumulative Hrs</div>
             <div>Status</div>
           </Table.Header>
-          {/* <Table.Body
+          <Table.Body
             data={paginated}
             render={jobcard => (
-              <JobCardRow
-                key={jobcard.id}
-                jobcard={jobcard}
-                onJobcardChange={setJobCard}
-              />
+              <JobCardRow key={jobcard.id} jobcard={jobcard} />
             )}
           />
           <Table.Footer>
             <Pagination count={filtered.length} />
-          </Table.Footer> */}
+          </Table.Footer>
         </Table>
       </div>
     </div>

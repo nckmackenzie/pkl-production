@@ -35,24 +35,24 @@ export default function JobCardForm() {
   const { isCreating, create } = useCreate();
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: {
-      jobcardNo: '',
+      jobcard_no: '',
       client: '',
       subject: '',
-      salesPerson: '',
+      sales_person: '',
       value: 0,
-      raisedDate: new Date(),
+      raised_date: new Date(),
     },
     resolver: zodResolver(formSchema),
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     const details = {
-      jobcardNo: values.jobcardNo,
+      jobcard_no: values.jobcard_no,
       client: values.client,
       subject: values.subject,
-      salesPerson: values.salesPerson,
+      sales_person: values.sales_person,
       value: +values.value!,
-      raisedDate: new Date(values.raisedDate).toISOString().split('T')[0],
+      raised_date: new Date(values.raised_date).toISOString().split('T')[0],
     };
 
     const hours = {
@@ -79,7 +79,7 @@ export default function JobCardForm() {
           onSubmit={form.handleSubmit(onSubmit)}
         >
           <FormField
-            name="jobcardNo"
+            name="jobcard_no"
             control={form.control}
             render={({ field }) => (
               <FormItem className="col-span-6">
@@ -92,7 +92,7 @@ export default function JobCardForm() {
             )}
           />
           <FormField
-            name="raisedDate"
+            name="raised_date"
             control={form.control}
             render={({ field }) => (
               <FormItem className="col-span-6">
@@ -149,7 +149,7 @@ export default function JobCardForm() {
           />
           <FormField
             control={form.control}
-            name="salesPerson"
+            name="sales_person"
             render={({ field }) => (
               <FormItem className="col-span-4">
                 <FormLabel>Sales Person</FormLabel>
