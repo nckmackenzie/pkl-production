@@ -73,3 +73,7 @@ export function errorHandling(error: unknown) {
     throw error;
   }
 }
+
+export function createDateTime(date: string, time: string) {
+  return new Date(`${date} ${time}`);
+}

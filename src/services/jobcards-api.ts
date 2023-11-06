@@ -1,5 +1,5 @@
 import { axiosRequest } from '@/lib/api';
-import { httpRequest, url } from '@/lib/utils';
+import { url } from '@/lib/utils';
 
 type Hours = {
   carving: number | null;
@@ -27,6 +27,14 @@ type Create = {
   hours: Hours;
 };
 
+type TaskDetails = {
+  jobcard_id: string;
+  department_id: string;
+  remarks?: string | null;
+  staffs: string[] | undefined;
+  started: string;
+};
+
 const baseUrl = `${url}/jobcards`;
 
 export async function getJobCards(): Promise<JobCardResponse[]> {
@@ -35,13 +43,18 @@ export async function getJobCards(): Promise<JobCardResponse[]> {
 }
 
 export async function createJobcard({ details, hours }: Create) {
-  try {
-    await httpRequest(
-      `${url}/jobcards`,
-      'POST',
-      JSON.stringify({ details, hours })
-    );
-  } catch (error) {
-    if (error) throw new Error(error.message);
-  }
+  await axiosRequest(
+    `${url}/jobcards`,
+    'POST',
+    JSON.stringify({ details, hours })
+  );
+}
+
+export async function getOpenJobCards(): Promise<JobCardResponse[]> {
+  const { data } = await axiosRequest(baseUrl + '/open');
+  return data;
+}
+
+export async function createTask(details: TaskDetails) {
+  await axiosRequest(`${url}/tasks`, 'POST', JSON.stringify(details));
 }

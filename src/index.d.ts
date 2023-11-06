@@ -50,10 +50,10 @@ type JobCardResponse = {
   sales_person: string;
 };
 
-// type Options = {
-//   label: string;
-//   value: string;
-// };
+type Options = {
+  label: string;
+  value: string;
+};
 
 // type Task = {
 //   id: number;

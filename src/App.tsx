@@ -11,6 +11,7 @@ import TasksIndividual from './pages/TasksIndividual';
 import OngoingJobs from './pages/OngoingJobs';
 import PeformanceByStaff from './pages/PeformanceByStaff';
 import CreateJobcard from './pages/CreateJobcard';
+import { DepartmentsProvider } from './context/departments';
 
 function App() {
   return (
@@ -21,7 +22,9 @@ function App() {
           <Route
             element={
               <ProtectedRoute>
-                <AppLayout />
+                <DepartmentsProvider>
+                  <AppLayout />
+                </DepartmentsProvider>
               </ProtectedRoute>
             }
           >
