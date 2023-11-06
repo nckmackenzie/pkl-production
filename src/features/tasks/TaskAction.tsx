@@ -8,24 +8,38 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { FILTEROPTIONS } from '../jobcards/constants';
+import { useDepartments } from '@/context/departments';
+import { useSearchParams } from 'react-router-dom';
 
 export default function TaskAction() {
+  const { departments } = useDepartments();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  function handleChange(value: string) {
+    if (value && value !== '') {
+      searchParams.set('department', value);
+    } else {
+      searchParams.delete('department');
+    }
+
+    setSearchParams(searchParams);
+  }
+
   return (
     <div className="flex items-center justify-between">
       <div className="w-1/2 grid grid-cols-12 items-end gap-x-2">
         <div className="col-span-4 p-1">
-          <Select>
+          <Select onValueChange={handleChange}>
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Filter By Dept" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="yard">Yard</SelectItem>
-              <SelectItem value="machinery">Machinery</SelectItem>
-              <SelectItem value="joinery">Joinery</SelectItem>
-              <SelectItem value="carving">Carving</SelectItem>
-              <SelectItem value="sanding">Sanding</SelectItem>
-              <SelectItem value="polishing">Polishing</SelectItem>
-              <SelectItem value="upholstery">Upholstery</SelectItem>
+              <SelectItem value="">All</SelectItem>
+              {departments.map(dept => (
+                <SelectItem key={dept.id} value={dept.id.toString()}>
+                  {dept.name.toUpperCase()}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
         </div>

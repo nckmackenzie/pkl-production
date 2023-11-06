@@ -25,7 +25,7 @@ export default function UserMenu() {
   if (!isAuthenticated) return null;
 
   function handleLogout() {
-    localStorage.removeItem('user');
+    localStorage.removeItem('pkl-auth-status');
     navigate('/login', { replace: true });
   }
 

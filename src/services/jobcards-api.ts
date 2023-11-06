@@ -27,14 +27,6 @@ type Create = {
   hours: Hours;
 };
 
-type TaskDetails = {
-  jobcard_id: string;
-  department_id: string;
-  remarks?: string | null;
-  staffs: string[] | undefined;
-  started: string;
-};
-
 const baseUrl = `${url}/jobcards`;
 
 export async function getJobCards(): Promise<JobCardResponse[]> {
@@ -53,8 +45,4 @@ export async function createJobcard({ details, hours }: Create) {
 export async function getOpenJobCards(): Promise<JobCardResponse[]> {
   const { data } = await axiosRequest(baseUrl + '/open');
   return data;
-}
-
-export async function createTask(details: TaskDetails) {
-  await axiosRequest(`${url}/tasks`, 'POST', JSON.stringify(details));
 }

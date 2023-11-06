@@ -168,7 +168,7 @@ export default function TaskForm() {
                   <FormItem className="col-span-6">
                     <FormLabel>Job Card</FormLabel>
                     <Popover open={openJobCard} onOpenChange={setOpenJobCard}>
-                      <PopoverTrigger asChild>
+                      <PopoverTrigger asChild disabled={isCreating}>
                         <FormControl>
                           <Button
                             variant="outline"

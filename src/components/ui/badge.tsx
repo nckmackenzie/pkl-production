@@ -18,6 +18,7 @@ const badgeVariants = cva(
         completed: 'border-transparent bg-completed text-completed-foreground',
         ongoing: 'border-transparent bg-ongoing text-ongoing-foreground',
         paused: 'border-transparent bg-paused text-paused-foreground',
+        unassigned: 'border-transparent bg-fuchsia-300 text-paused-foreground',
       },
     },
     defaultVariants: {

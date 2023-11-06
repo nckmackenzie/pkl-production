@@ -55,11 +55,8 @@ type Options = {
   value: string;
 };
 
-// type Task = {
-//   id: number;
-//   jobcardNo: string;
-//   staff: string;
-//   hrsTaken: number;
-//   hrsAssigned: number;
-//   staffs?: string[];
-// };
+type Task = JobCardResponse & {
+  department_id: string;
+  assigned_hrs: number;
+  department_name?: string;
+};
